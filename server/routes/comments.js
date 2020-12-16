@@ -40,7 +40,7 @@ router.post("/delete", checkAuth, async (req, res) => {
   const {comment_id, post_id} = req.body
   if (!mongoose.Types.ObjectId.isValid(post_id)) {
     return res.status(400).send({
-      badFormat: "The id doesnt have the right format.",
+      badFormat: "The post id doesnt have the right format.",
     });
   }
   const post = await Post.findById(post_id);

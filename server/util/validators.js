@@ -1,3 +1,6 @@
+const mongoose = require('mongoose')
+const Post = require("../models/Post");
+
 module.exports.validateLogin = (username, password) => {
   let errors = {};
   if (!username || !password) {
@@ -36,6 +39,7 @@ module.exports.validateRegister = ({
   };
 };
 
+// Validate the title of post, for endpoint to create one.
 module.exports.validateInputPost = (title) => {
   let errors = {};
   if (!title) {
@@ -49,3 +53,19 @@ module.exports.validateInputPost = (title) => {
     valid: Object.keys(errors).length < 1,
   };
 };
+
+module.exports.validatePostId = async (post_id) => {
+  let errors = {}
+  if (!mongoose.Types.ObjectId.isValid(post_id)) {
+    errors.badFormat = "The id doesnt have the right format."
+  } else {
+    const post = await Post.findById(post_id);
+    if (!post) {
+      errors.notFound = "The post doesnt exists."
+    }
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1
+  }
+}

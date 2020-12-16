@@ -2,8 +2,7 @@ const express = require("express");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const { checkAuth } = require("../util/checkAuth");
-const {validateInputPost} = require("../util/validators")
-const mongoose = require('mongoose')
+const { validatePostId } = require("../util/validators")
 
 let router = express.Router()
 
@@ -13,19 +12,20 @@ router.get("/", async (req, res) => {
   res.send(posts);
 });
 
-// DELETE = Delete One post by id.
-router.delete("/:id", checkAuth, async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(400).send({
-      badFormat: "The id doesnt have the right format.",
-    });
-  }
+// GET - Get one post by id
+router.get("/:id", async (req, res) => {
+  const {valid, errors} = await validatePostId(req.params.id)
+  if(!valid) return res.status(400).send(errors)
+
   const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(400).send({
-      notFound: "The post doesnt exists.",
-    });
-  }
+  res.send(post)
+})
+
+// DELETE - Delete One post by id.
+router.delete("/:id", checkAuth, async (req, res) => {
+  const {valid, errors} = await validatePostId(req.params.id)
+  if(!valid) return res.status(400).send(errors)
+  const post = await Post.findById(req.params.id);
 
   if (req.user.username !== post.username) {
     return res.status(401).send({
@@ -77,30 +77,22 @@ router.post("/create", checkAuth, async (req, res) => {
 
 // PUT - Like/Dislike a Post
 router.put("/like/:id", checkAuth, async (req, res) => {
-  const username_logged = req.user.username
-  const post_id = req.params.id
-  if (!mongoose.Types.ObjectId.isValid(post_id)) {
-    return res.status(400).send({
-      badFormat: "The id doesnt have the right format.",
-    });
-  }
+  const username_logged = req.user.username;
+  const post_id = req.params.id;
+  const { valid, errors } = await validatePostId(post_id);
+  if (!valid) return res.status(400).send(errors);
 
-  const post = await Post.findById(post_id)
-  if (post) {
-    if(post.likes.find(like => like.username === username_logged)) {
-      post.likes = post.likes.filter(like => like.username !== username_logged)
-    } else {
-      post.likes.push({
-        username: username_logged,
-        createdAt: new Date().toISOString()
-      })
-    }
-    await post.save()
-    res.send(post)
+  const post = await Post.findById(post_id);
+  if (post.likes.find((like) => like.username === username_logged)) {
+    post.likes = post.likes.filter((like) => like.username !== username_logged);
   } else {
-    return res.status(400).send({
-      notFound: "The post doesnt exists.",
+    post.likes.push({
+      username: username_logged,
+      createdAt: new Date().toISOString(),
     });
   }
-})
+  await post.save();
+  res.send(post);
+});
+
 module.exports = router

@@ -35,3 +35,17 @@ module.exports.validateRegister = ({
     valid: Object.keys(errors).length < 1,
   };
 };
+
+module.exports.validateInputPost = (title) => {
+  let errors = {};
+  if (!title) {
+    errors.fields = "The fields cannot be empty.";
+  }
+  if(title.length > 70 || title.length < 4) {
+    errors.fields = "The title must be between 5 and 70 characters."
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};

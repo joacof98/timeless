@@ -21,7 +21,7 @@ const generateToken = (userInfo) => {
   );
 };
 
-// Register one user
+// POST - Register one user
 router.post("/register", async (req, res) => {
   let { username, password, email } = req.body;
   const { errors, valid } = validateRegister(req.body);
@@ -58,7 +58,7 @@ router.post("/register", async (req, res) => {
   });
 });
 
-// Login user
+// POST - Login user
 router.post("/login", async (req, res) => {
   let { username, password } = req.body;
   const { errors, valid } = validateLogin(username, password);
@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
   });
 });
 
-// Get basic info of user
+// GET - Get basic info of user
 router.get("/:username", async (req, res) => {
   const user = await User.findOne({ username: req.params.username });
   if (!user) {
@@ -103,7 +103,7 @@ router.get("/:username", async (req, res) => {
   res.send(userInfo);
 });
 
-/*Change profile information.
+/* PUT - Change profile information.
 (the path is taken from token, no problem with errors or logged state.)
 */
 router.put("/:username", async (req, res) => {
@@ -128,4 +128,20 @@ router.put("/:username", async (req, res) => {
   }
 
 })
+
+// POST -  Follow/Unfollow an user with the given username and the indication
+router.post("/follow", checkAuth, async (req, res) => {
+  const {follow, username} = req.body
+  const user_to_follow = await User.findOne({username})
+  user_to_follow.followers = user_to_follow.followers + follow
+  await user_to_follow.save()
+
+  const my_user = await User.findOne({username: req.user.username})
+  my_user.following = my_user.following + follow
+  await my_user.save()
+
+  res.send({success: "Following"})
+})
+
+
 module.exports = router

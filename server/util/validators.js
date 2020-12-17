@@ -69,3 +69,18 @@ module.exports.validatePostId = async (post_id) => {
     valid: Object.keys(errors).length < 1
   }
 }
+
+module.exports.validateHabit = (name,description) => {
+  let errors = {}
+  if (!name || !description) {
+    errors.fields = "The fields name or description cannot be empty.";
+  }
+  else if(name.length > 70 || name.length < 4) {
+    errors.fields = "The name of the habit must be between 5 and 70 characters."
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1
+  }
+};

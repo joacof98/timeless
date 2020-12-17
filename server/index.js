@@ -18,9 +18,11 @@ app.use(bodyParser.json());
 const users = require('./routes/users');
 const posts = require('./routes/posts');
 const comments = require('./routes/comments');
+const habits = require('./routes/habits');
 app.use('/users/', users)
 app.use('/posts/', posts)
 app.use('/comments', comments)
+app.use('/habits', habits)
 
 mongoose
   .connect(MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true })

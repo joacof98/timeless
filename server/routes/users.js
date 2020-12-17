@@ -99,6 +99,7 @@ router.get("/:username", async (req, res) => {
     imageUrl: user.imageUrl,
     followers: user.followers,
     following: user.following,
+    habits: user.habits
   };
   res.send(userInfo);
 });

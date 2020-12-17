@@ -42,8 +42,31 @@ router.delete("/:id", checkAuth, async (req, res) => {
   res.send({ success: "Habit deleted succesfully!" });
 })
 
-// PUT - Update the current streak (days implementing the habit)
+// PUT - Update habit information
 router.put("/:id", checkAuth, async (req, res) => {
+  const habit_id = req.params.id
+  const {name, description, color, to_avoid} = req.body
+  const {valid, errors} = validateHabit(name, description)
+  if(!valid) return res.status(400).send(errors)
+
+  const user = await User.findOne({username: req.user.username})
+  const habitIndex = user.habits.findIndex(h => h.id === habit_id);
+  if(habitIndex == -1) {
+    return res.status(400).send({
+      notFound: "The habit doesnt exists"
+    })
+  }
+  user.habits[habitIndex].name = name
+  user.habits[habitIndex].description = description
+  if(color) user.habits[habitIndex].color = color
+  if(to_avoid) user.habits[habitIndex].to_avoid = to_avoid
+
+  const result = await user.save()
+  res.send(result)
+})
+
+// PUT - Update the current streak (days implementing the habit)
+router.put("/:id/streak", checkAuth, async (req, res) => {
   const habit_id = req.params.id
   const user = await User.findOne({username: req.user.username})
   const habitIndex = user.habits.findIndex(h => h.id === habit_id);

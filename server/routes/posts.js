@@ -75,7 +75,7 @@ router.post("/create", checkAuth, async (req, res) => {
   }
 });
 
-// PUT - Like/Dislike a Post
+// PUT - Like/Dislike a Post given an id.
 router.put("/like/:id", checkAuth, async (req, res) => {
   const username_logged = req.user.username;
   const post_id = req.params.id;

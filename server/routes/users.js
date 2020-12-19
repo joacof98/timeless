@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
     username,
     password,
     email,
-    imageUrl: "https://i.imgur.com/gcv7ide.jpg",
+    imageUrl: "https://i.imgur.com/GBg52yB.png",
     createdAt: new Date().toISOString(),
     lock: new Date().toISOString(),
     followers: 0,

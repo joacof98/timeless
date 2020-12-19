@@ -30,6 +30,10 @@
   font-family: 'Roboto Mono', monospace;
 }
 
+#btnMain:hover {
+  background-color: rgb(41, 66, 70);
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
 #time-phrase{
   font-size: 1.4em;

@@ -1,0 +1,35 @@
+#imgCover {
+  width: 100%;
+  height: 630px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#registerCover {
+  background-color: #D9D4A7;
+  height: 630px;
+}
+
+.formContainer {
+  margin: auto;
+  margin-top: 60px;
+  padding: 15px;
+  width: 480px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#titleForm {
+  font-family: 'Roboto Mono', monospace;
+  color: #315054;
+}
+
+#btnReg {
+  background-color: #315054;
+  color: #DCB172;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#btnReg:hover {
+  background-color: rgb(41, 66, 70);
+}

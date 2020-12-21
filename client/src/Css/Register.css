@@ -19,9 +19,15 @@
   font-family: 'Roboto Mono', monospace;
 }
 
+.formContainerTop {
+  margin-top: 130px;
+}
+
 #titleForm {
   font-family: 'Roboto Mono', monospace;
   color: #315054;
+  animation: fadeInRight;
+  animation-duration: 2s;
 }
 
 #btnReg {

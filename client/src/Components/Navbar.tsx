@@ -1,20 +1,22 @@
-import React, { useState, MouseEvent } from "react";
-import { Menu, Container, Image } from "semantic-ui-react";
+import React, { useState, MouseEvent, useContext } from "react";
+import { Menu, Container, Image, Dropdown } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import {AuthContext} from '../util/auth';
 import logoMini from '../Assets/logo50x50.png';
 
 const Navbar: React.FC = () => {
+  const {user, logout} = useContext(AuthContext)
   const pathname = window.location.pathname;
   const path = pathname === "/" ? "home" : pathname.substr(1);
   const [activeItem, setActiveItem] = useState<String>(path);
 
-  const handleItemClick = (e: MouseEvent, ac: String) => {
-    setActiveItem(ac)
+  const handleItemClick = (e: MouseEvent, link: String) => {
+    setActiveItem(link)
   }
 
-  const menuBar = (
+  const menuBar = !user ? (
     <Container>
-      <Menu pointing secondary size="massive" >
+      <Menu pointing secondary size="massive">
         <Image
           src={logoMini}
           onClick={() => setActiveItem("home")}
@@ -22,7 +24,7 @@ const Navbar: React.FC = () => {
           to="/"
         />
 
-        <Menu.Menu position="right" id='timeless-font'>
+        <Menu.Menu position="right" id="timeless-font">
           <Menu.Item
             name="Posts"
             active={activeItem === "posts"}
@@ -45,6 +47,38 @@ const Navbar: React.FC = () => {
             as={Link}
             to="/register"
           />
+        </Menu.Menu>
+      </Menu>
+    </Container>
+  ) : (
+    <Container>
+      <Menu pointing secondary size="massive">
+        <Image
+          src={logoMini}
+          onClick={() => setActiveItem("home")}
+          as={Link}
+          to="/"
+        />
+
+        <Menu.Menu position="right" id="timeless-font">
+          <Menu.Item
+            name="Posts"
+            active={activeItem === "posts"}
+            onClick={(e) => handleItemClick(e, "posts")}
+            as={Link}
+            to="/posts"
+          />
+
+          <Dropdown item text={`${user.username}`}>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to={`/u/${user.username}`}>
+                Profile
+              </Dropdown.Item>
+              <Dropdown.Item>Habits</Dropdown.Item>
+              <Dropdown.Item>Settings</Dropdown.Item>
+              <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Menu.Menu>
       </Menu>
     </Container>

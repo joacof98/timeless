@@ -4,3 +4,8 @@ interface UserRegisterInput {
   password: String,
   confirmPassword: String
 }
+
+interface UserLoginInput {
+  username: String,
+  password: String
+}

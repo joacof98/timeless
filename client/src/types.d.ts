@@ -15,12 +15,7 @@ interface UserInfo {
   email: String,
   imageUrl: String,
   createdAt: String,
-  followers: Number,
-  following: Number,
+  followers: Array,
+  following: Array,
   habits: Array
-}
-
-interface FollowRequest {
-  username: String,
-  follow: Number
 }

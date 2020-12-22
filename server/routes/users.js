@@ -131,15 +131,27 @@ router.put("/:username", async (req, res) => {
 
 })
 
-// POST -  Follow/Unfollow an user with the given username and the indication
+// POST -  Follow/Unfollow an user with the given username
 router.post("/follow", checkAuth, async (req, res) => {
   const {username} = req.body
   const user_to_follow = await User.findOne({username})
-  user_to_follow.followers.push({username: req.user.username})
+  let followers = user_to_follow.followers
+  if(followers.find((follower) => follower.username === req.user.username)) {
+    const index = followers.indexOf({username: req.user.username})
+    followers.splice(index, 1)
+  } else {
+    followers.push({username: req.user.username})
+  }
   await user_to_follow.save()
 
   const my_user = await User.findOne({username: req.user.username})
-  my_user.following.push({username})
+  let my_followings = my_user.following
+  if(my_followings.find((following) => following.username === username)) {
+    const index = my_followings.indexOf({username: username})
+    my_followings.splice(index, 1)
+  } else {
+    my_followings.push({username: username})
+  }
   await my_user.save()
 
   res.send({success: "Following"})

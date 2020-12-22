@@ -36,9 +36,9 @@ const getUser = async (username: String) => {
     })
 };
 
-const followProfileUser = async (info: FollowRequest) => {
+const followProfileUser = async (username: String) => {
   return await axios
-    .post('http://localhost:4000/users/follow', info, {headers: jwtHeader})
+    .post('http://localhost:4000/users/follow', username, {headers: jwtHeader})
     .then((response) => {
       return response.data;
     })

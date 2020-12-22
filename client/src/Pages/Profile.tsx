@@ -14,8 +14,8 @@ const Profile: React.FC = () => {
     email: '',
     imageUrl: '',
     createdAt: '',
-    followers: 0,
-    following: 0,
+    followers: [],
+    following: [],
     habits: []
   })
 
@@ -51,13 +51,13 @@ const Profile: React.FC = () => {
             <Statistic.Group horizontal size="mini" id="statistics">
               <Statistic color="violet">
                 <Statistic.Value id="font-profile">
-                  {user.followers}
+                  {user.followers.length}
                 </Statistic.Value>
                 <Statistic.Label id="font-profile">Followers</Statistic.Label>
               </Statistic>
               <Statistic color="violet">
                 <Statistic.Value id="font-profile">
-                  {user.following}
+                  {user.following.length}
                 </Statistic.Value>
                 <Statistic.Label id="font-profile">Following</Statistic.Label>
               </Statistic>

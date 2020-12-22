@@ -7,13 +7,9 @@ const FollowButton: React.FC<{username: String}> = ({username}) => {
 
   const followUser = async (e: MouseEvent) => {
     setFollow(!follow)
-    let followNumber: Number = 1
-    if(!follow) followNumber = -1
-    const followReq = {
-      username,
-      follow: followNumber
-    }
-    const res = await followProfileUser(followReq)
+    
+  
+    const res = await followProfileUser(username)
     console.log(res)
   }
 

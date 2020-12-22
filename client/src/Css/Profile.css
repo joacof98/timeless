@@ -1,0 +1,35 @@
+#profileInfoCover {
+  text-align: center;
+  background-color: #e6e0b2;
+  height: 630px;
+}
+
+#postsInfoCover {
+  background-color: #d9d4a7;
+  height: 630px;
+}
+
+#font-profile {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.profileCard {
+  margin-top: 80px;
+}
+
+#statistics {
+  display: inline-block;
+}
+
+#statistics > div {
+  margin-left: 10px;
+}
+
+#btnFollow {
+  background-color: #2A2E46;
+  color: white;
+}
+
+#btnFollow:hover {
+  background-color: rgb(41, 66, 70);
+}

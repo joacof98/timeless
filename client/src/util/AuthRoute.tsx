@@ -11,7 +11,7 @@ function AuthRoute({ component: Component, ...rest}) {
 		<Route
 			{...rest}
 			render={props => 
-				user ? <Redirect to={"/" + user.username} /> : <Component {...props} />
+				user ? <Redirect to={"/u/" + user.username} /> : <Component {...props} />
 			}
 		/>
 	)

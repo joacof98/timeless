@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
             to="/posts"
           />
 
-          <Dropdown item text={`${user.username}`}>
+          <Dropdown icon='user' item text={`${user.username}`}>
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to={`/u/${user.username}`}>
                 Profile

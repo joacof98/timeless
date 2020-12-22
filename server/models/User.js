@@ -8,8 +8,8 @@ const userSchema = new Schema({
   imageUrl: String,
   createdAt: { type: String, required: true },
   lock: { type: String, required: true },
-  followers: { type: Number, required: true },
-  following: { type: Number, required: true },
+  followers: [{username: String}],
+  following: [{username: String}],
   habits: [
     {
       name: { type: String, required: true },

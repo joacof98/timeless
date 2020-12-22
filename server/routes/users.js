@@ -44,8 +44,8 @@ router.post("/register", async (req, res) => {
     imageUrl: "https://i.imgur.com/GBg52yB.png",
     createdAt: new Date().toISOString(),
     lock: new Date().toISOString(),
-    followers: 0,
-    following: 0,
+    followers: [],
+    following: [],
   });
 
   const result = await newUser.save();
@@ -97,6 +97,7 @@ router.get("/:username", async (req, res) => {
     username: user.username,
     email: user.email,
     imageUrl: user.imageUrl,
+    createdAt: user.createdAt,
     followers: user.followers,
     following: user.following,
     habits: user.habits
@@ -132,13 +133,13 @@ router.put("/:username", async (req, res) => {
 
 // POST -  Follow/Unfollow an user with the given username and the indication
 router.post("/follow", checkAuth, async (req, res) => {
-  const {follow, username} = req.body
+  const {username} = req.body
   const user_to_follow = await User.findOne({username})
-  user_to_follow.followers = user_to_follow.followers + follow
+  user_to_follow.followers.push({username: req.user.username})
   await user_to_follow.save()
 
   const my_user = await User.findOne({username: req.user.username})
-  my_user.following = my_user.following + follow
+  my_user.following.push({username})
   await my_user.save()
 
   res.send({success: "Following"})

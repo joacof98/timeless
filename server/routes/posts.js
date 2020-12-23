@@ -3,6 +3,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const { checkAuth } = require("../util/checkAuth");
 const { validatePostId } = require("../util/validators")
+const { validateInputPost } = require("../util/validators")
 
 let router = express.Router()
 
@@ -20,6 +21,13 @@ router.get("/:id", async (req, res) => {
   const post = await Post.findById(req.params.id);
   res.send(post)
 })
+
+// GET - Get all posts of one user
+router.get("/u/:username", async (req, res) => {
+  const username = req.params.username
+  const posts = await Post.find({username}).sort({ createdAt: -1 });
+  res.send(posts);
+});
 
 // DELETE - Delete One post by id.
 router.delete("/:id", checkAuth, async (req, res) => {

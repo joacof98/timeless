@@ -3,8 +3,9 @@ import { Grid, Image, Header, Statistic} from "semantic-ui-react";
 import {useParams} from 'react-router-dom'
 import {getUser} from '../util/requests'
 import '../Css/Profile.css'
-import FollowButton from '../Components/FollowButton'
 
+import FollowButton from '../Components/FollowButton'
+import UserProfileFeed from '../Components/UserProfileFeed'
 const moment = require('moment');
 
 const Profile: React.FC = () => {
@@ -25,12 +26,12 @@ const Profile: React.FC = () => {
       setUser(userData)
     }
     getUserData()
-  }, [username])
+  }, [username, user])
 
   return (
     <Grid columns={2}>
       <Grid.Row style={{ height: "630px" }}>
-        <Grid.Column id="profileInfoCover" computer={4}>
+        <Grid.Column id="profileInfoCover" computer={4} mobile={16}>
           <div className="profileCard">
             <Image
               style={{ margin: "auto" }}
@@ -39,7 +40,7 @@ const Profile: React.FC = () => {
               size="small"
               bordered
             />
-            <Header as="h1" id="font-profile">
+            <Header as="h1" id="font-profile" style={{'color': '#315054'}}>
               {user.username}
             </Header>
             <b>
@@ -64,11 +65,11 @@ const Profile: React.FC = () => {
             </Statistic.Group>
           </div>
 
-          <FollowButton username={user.username} />
+          <FollowButton userInfo={user} />
         </Grid.Column>
 
-        <Grid.Column id="postsInfoCover" computer={12}>
-          actividad
+        <Grid.Column id="postsInfoCover" computer={12} mobile={16}>
+          <UserProfileFeed username={username} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

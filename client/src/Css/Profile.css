@@ -14,7 +14,7 @@
 }
 
 .profileCard {
-  margin-top: 80px;
+  margin-top: 160px;
 }
 
 #statistics {
@@ -32,4 +32,18 @@
 
 #btnFollow:hover {
   background-color: rgb(41, 66, 70);
+}
+
+/* Posts Feed */
+#feedCover {
+  width: 750px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#feedTitle {
+  font-family: 'Roboto Mono', monospace;
+  margin-top: 15px;
+  color: #315054;
+  text-align: center;
 }

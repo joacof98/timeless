@@ -1,3 +1,4 @@
+// Users
 interface UserRegisterInput {
   username: String,
   email: String,
@@ -18,4 +19,16 @@ interface UserInfo {
   followers: Array,
   following: Array,
   habits: Array
+}
+
+// Posts
+interface PostInfo {
+  username: String,
+  title: String,
+  createdAt: String,
+  description: String,
+  imageUrl: String,
+  videoUrl: String,
+  likes: Array,
+  comments: Array
 }

@@ -38,7 +38,7 @@ const getUser = async (username: String) => {
 
 const followProfileUser = async (username: String) => {
   return await axios
-    .post('http://localhost:4000/users/follow', username, {headers: jwtHeader})
+    .post('http://localhost:4000/users/follow', {username}, {headers: jwtHeader})
     .then((response) => {
       return response.data;
     })
@@ -47,4 +47,15 @@ const followProfileUser = async (username: String) => {
     })
 }
 
-export {registerUser, loginUser, getUser, followProfileUser}
+const getPostsByUsername = async (username: String) => {
+  return await axios
+    .get(`http://localhost:4000/posts/u/${username}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+export {registerUser, loginUser, getUser, followProfileUser, getPostsByUsername}

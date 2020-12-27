@@ -108,9 +108,12 @@ router.get("/:username", async (req, res) => {
 /* PUT - Change profile information.
 (the path is taken from token, no problem with errors or logged state.)
 */
-router.put("/:username", async (req, res) => {
+router.put("/:username", checkAuth, async (req, res) => {
   const my_user = await User.findOne({username: req.params.username})
   let {username, imageUrl} = req.body
+  if(!username && !imageUrl) {
+    return res.status(400).send({empty: "Please, at least fill one field to update."})
+  }
   if (username) {
     const user_to_change = await User.findOne({username})
     if(user_to_change) {
@@ -120,15 +123,14 @@ router.put("/:username", async (req, res) => {
     } else {
       my_user.username = username
       await my_user.save()
-      res.send({updateSuccess: "Updated succesfully!"})
     }
   }
   if(imageUrl) {
     my_user.imageUrl = imageUrl
     await my_user.save()
-    res.send({updateSuccess: "Updated succesfully!"})
   }
 
+  return res.send(my_user)
 })
 
 // POST -  Follow/Unfollow an user with the given username

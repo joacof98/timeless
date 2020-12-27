@@ -58,4 +58,34 @@ const getPostsByUsername = async (username: String) => {
     })
 }
 
-export {registerUser, loginUser, getUser, followProfileUser, getPostsByUsername}
+const updateProfile = async (info: UserUpdateInfo, username: String) => {
+  return await axios
+    .put(`http://localhost:4000/users/${username}`, info, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+const getHabitPhrase = async () => {
+  return await axios
+    .get(`https://type.fit/api/quotes`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+export {
+  registerUser,
+  loginUser,
+  getUser,
+  followProfileUser,
+  getPostsByUsername,
+  updateProfile,
+  getHabitPhrase
+};

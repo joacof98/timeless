@@ -1,0 +1,47 @@
+#habitsCover {
+    text-align: center;
+    background-color: #e6e0b2;
+    height: 630px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
+#time-phrase{
+  font-size: 1.4em;
+  width:60%;
+  margin:50px auto;
+  font-family:Open Sans;
+  font-style:italic;
+  color: #555555;
+  padding:1em 29px 1em 74px;
+  border-left:8px solid #315054 ;
+  line-height:1.6;
+  position: relative;
+  background:#EDEDED;
+  margin-top: 15px;
+}
+
+#time-phrase::before{
+  font-family:Arial;
+  content: "\201C";
+  color:#315054;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+  animation-iteration-count: infinite;
+  animation: pulse;
+  animation-duration: 2s;
+  animation-delay: 2s;
+}
+
+#time-phrase::after{
+  content: '';
+}
+
+#time-phrase span{
+  display:block;
+  color:#333333;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
+}

@@ -1,0 +1,31 @@
+#settingsCover {
+  background: #D9D4A7;
+  height: 660px;
+}
+
+#cardSettings {
+  width: 650px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#titleCard {
+  color: #315054;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#btnUpload {
+  background-color: #315054;
+  color: #DCB172;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#btnUpload:hover {
+  background-color: rgb(41, 66, 70);
+}
+
+#extraMsg {
+  width: 300px;
+  margin: auto;
+  margin-top: 15px;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import {AuthProvider} from './util/auth'
 import AuthRoute from './util/AuthRoute';
+import NotAuthRoute from './util/NotAuthRoute';
 import 'semantic-ui-css/semantic.min.css'
 
 import Home from './Pages/Home';
@@ -9,6 +10,8 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Navbar from './Components/Navbar'
 import Profile from './Pages/Profile'
+import Settings from './Pages/Settings'
+import Habits from './Pages/Habits'
 
 const App: React.FC = () => {
 
@@ -21,6 +24,8 @@ const App: React.FC = () => {
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
           <Route exact path="/u/:username" component={Profile} />
+          <NotAuthRoute exact path="/settings" component={Settings} />
+          <NotAuthRoute exact path="/habits" component={Habits} />
         </Router>
       </AuthProvider>
     </div>

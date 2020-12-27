@@ -79,8 +79,12 @@ const Navbar: React.FC = () => {
               <Dropdown.Item as={Link} to={`/u/${user.username}`}>
                 Profile
               </Dropdown.Item>
-              <Dropdown.Item>Habits</Dropdown.Item>
-              <Dropdown.Item>Settings</Dropdown.Item>
+              <Dropdown.Item as={Link} to={`/habits`}>
+                Habits
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to={`/settings`}>
+                Settings
+              </Dropdown.Item>
               <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

@@ -41,7 +41,7 @@ const UserProfileFeed: React.FC<{ username: String }> = ({ username }) => {
           <Segment raised id="feedCover">
             <Item.Group divided>
               {posts.map((post) => (
-                <Item>
+                <Item key={post.title}>
                   {post.imageUrl && <Item.Image size="tiny" src={post.imageUrl} />}
                   <Item.Content>
                     <Item.Header as="a">{post.title}</Item.Header>

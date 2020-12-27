@@ -37,8 +37,9 @@ const Profile: React.FC = () => {
               style={{ margin: "auto" }}
               src={user.imageUrl}
               circular
-              size="small"
               bordered
+              height='200px'
+              width='200px'
             />
             <Header as="h1" id="font-profile" style={{'color': '#315054'}}>
               {user.username}

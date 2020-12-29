@@ -1,41 +1,67 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../Css/Habits.css";
-import { Grid, Header, Segment } from "semantic-ui-react";
-import {getHabitPhrase} from '../util/requests'
+import { Grid, Segment, Transition } from "semantic-ui-react";
+import { getHabitPhrase, getUser } from '../util/requests'
+import { AuthContext } from "../util/auth";
 
+import ModalCreateHabit from '../Components/ModalCreateHabit'
+import HabitCard from '../Components/HabitCard'
+
+const _ = require('lodash')
 const Habits: React.FC = () => {
-  const [phrases, setPhrases] = useState<Phrase[]>([]);
+  const { user } = useContext(AuthContext);
+  const [phrase, setPhrase] = useState<Phrase>({
+    author: "",
+    text: "",
+  });
+  const [habits, setHabits] = useState<Habit[]>([]);
+  const [habitCreated, setHabitCreated] = useState<boolean>(false);
 
   useEffect(() => {
     async function getPhrase() {
-      const res = await getHabitPhrase()
-      setPhrases(res)
+      const res = await getHabitPhrase();
+      setPhrase(_.sample(res));
     }
-    getPhrase()
+    getPhrase();
   }, [])
+
+  useEffect(() => {
+    async function getUserHabits() {
+      const res = await getUser(user.username);
+      setHabits(res.habits);
+    }
+    getUserHabits();
+  }, [habitCreated, user.username]);
+
+  const habitAdded = () => {
+    setHabitCreated(!habitCreated);
+  };
 
   return (
     <div>
       <Segment id="habitsCover">
-        <Grid>
+        <Grid textAlign="center">
           <Grid.Row>
             <blockquote id="time-phrase">
-              The two most powerful warriors are patience and time.
-              <span>Leo Tolstoy</span>
+              {phrase.text}
+              <span>{phrase.author}</span>
             </blockquote>
           </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column width={4}>
-                {
-                    phrases.map(phrase => (
-                        <p key={phrase.author}>
-                            {phrase.author}
-                        </p>
-                    ))
-                }
-            </Grid.Column>
-            <Grid.Column width={12}>column1</Grid.Column>
+          <ModalCreateHabit habitAdded={habitAdded} />
+          <Grid.Row style={{ "background-color": "#e6e0b2" }}>
+            <Transition.Group>
+              {habits &&
+                habits.map((h) => (
+                  <Grid.Column
+                    key={h.name}
+                    computer={4}
+                    mobile={16}
+                    style={{ marginBottom: 20 }}
+                  >
+                    <HabitCard habit={h} habitAdded={habitAdded} />
+                  </Grid.Column>
+                ))}
+            </Transition.Group>
           </Grid.Row>
         </Grid>
       </Segment>

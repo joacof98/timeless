@@ -26,6 +26,21 @@ interface UserUpdateInfo {
   imageUrl: String
 }
 
+interface UserHabitInput {
+  name: string,
+  description: string,
+  to_avoid: string,
+  color: string
+}
+
+interface Habit extends UserHabitInput {
+  _id: string,
+  currentStreak: {
+    day: number,
+    lock: string
+  }
+}
+
 // Posts
 interface PostInfo {
   username: String,

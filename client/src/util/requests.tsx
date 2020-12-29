@@ -80,6 +80,28 @@ const getHabitPhrase = async () => {
     })
 }
 
+const createHabit = async (habit: UserHabitInput) => {
+  return await axios
+    .post('http://localhost:4000/habits/create', habit, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+const updateHabitStreak = async (habit_id: string) => {
+  return await axios
+    .put(`http://localhost:4000/habits/${habit_id}/streak`, {}, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
 export {
   registerUser,
   loginUser,
@@ -87,5 +109,7 @@ export {
   followProfileUser,
   getPostsByUsername,
   updateProfile,
-  getHabitPhrase
+  getHabitPhrase,
+  createHabit,
+  updateHabitStreak
 };

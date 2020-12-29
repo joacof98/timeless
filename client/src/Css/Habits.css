@@ -1,14 +1,28 @@
+#timeless-font {
+  font-family: 'Roboto Mono', monospace;
+}
+
+#btnMain {
+  background-color: #315054;
+  color: #DCB172;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#btnMain:hover {
+  background-color: rgb(41, 66, 70);
+}
+
 #habitsCover {
-    text-align: center;
-    background-color: #e6e0b2;
-    height: 630px;
+  height: 630px;
+  text-align: center;
+  background-color: #e6e0b2;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
 #time-phrase{
   font-size: 1.4em;
   width:60%;
-  margin:50px auto;
+  margin: 15px auto;
   font-family:Open Sans;
   font-style:italic;
   color: #555555;
@@ -45,3 +59,4 @@
   font-weight: bold;
   margin-top:1em;
 }
+

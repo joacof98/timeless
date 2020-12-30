@@ -14,7 +14,7 @@ import "../Css/Habits.css";
 import { colorOptions } from "../util/ColorOptions";
 import {createHabit} from '../util/requests'
 
-const ModalCreateHabit: React.FC<{habitAdded: () => void}> = ({habitAdded}) => {
+const ModalCreateHabit: React.FC<{fetchHabits: () => void}> = ({fetchHabits}) => {
   const [open, setOpen] = useState<boolean>(false);
   const [colorLabel, setColorLabel] = useState<string>("Blue");
   const [habitInfo, setHabitInfo] = useState<UserHabitInput>({
@@ -42,7 +42,7 @@ const ModalCreateHabit: React.FC<{habitAdded: () => void}> = ({habitAdded}) => {
     if (res.error) {
       setErrors(res.error);
     } else {
-      habitAdded();
+      fetchHabits();
       setOpen(false);
       setErrors({})
     }
@@ -66,9 +66,9 @@ const ModalCreateHabit: React.FC<{habitAdded: () => void}> = ({habitAdded}) => {
             <Loader inverted>Loading</Loader>
           </Dimmer>
         )}
-        <Header icon="chess" content="Create your habit" />
+        <Header icon="chess" id='timeless-font' content="Create your habit" />
         <Modal.Content>
-          <Form noValidate>
+          <Form noValidate id='timeless-font'>
             <Form.Input
               icon="pencil alternate"
               iconPosition="left"

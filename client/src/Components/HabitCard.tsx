@@ -3,10 +3,12 @@ import { Card, Button } from "semantic-ui-react";
 import "../Css/Habits.css";
 import {updateHabitStreak} from '../util/requests'
 
+import ModalUpdateHabit from '../Components/ModalUpdateHabit'
+
 const HabitCard: React.FC<{
   habit: Habit;
-  habitAdded: () => void;
-}> = ({ habit, habitAdded }) => {
+  fetchHabits: () => void;
+}> = ({ habit, fetchHabits }) => {
   const [errors, setErrors] = useState({});
 
   const addStreak = async () => {
@@ -14,7 +16,7 @@ const HabitCard: React.FC<{
     if (res.error) {
       setErrors(res.error);
     } else {
-      habitAdded();
+      fetchHabits();
     }
   };
 
@@ -22,13 +24,12 @@ const HabitCard: React.FC<{
     <div>
       <Card raised color={habit.color as any} fluid>
         <Card.Content>
-          <Button
+          <ModalUpdateHabit
             color={habit.color as any}
-            circular
-            floated="right"
-            icon="edit"
-            size="mini"
+            habit={habit}
+            fetchHabits={fetchHabits}
           />
+
           <Card.Header id="timeless-font" style={{ marginLeft: "25px" }}>
             {habit.name.substr(0, 19)}
           </Card.Header>

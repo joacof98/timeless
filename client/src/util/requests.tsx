@@ -91,9 +91,31 @@ const createHabit = async (habit: UserHabitInput) => {
     })
 }
 
+const updateHabit = async (habit_id: string, habit: UserHabitInput ) => {
+  return await axios
+    .put(`http://localhost:4000/habits/${habit_id}`, habit, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
 const updateHabitStreak = async (habit_id: string) => {
   return await axios
     .put(`http://localhost:4000/habits/${habit_id}/streak`, {}, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+const deleteHabit = async (habit_id: string) => {
+  return await axios
+    .delete(`http://localhost:4000/habits/${habit_id}`, {headers: jwtHeader})
     .then((response) => {
       return response.data;
     })
@@ -111,5 +133,7 @@ export {
   updateProfile,
   getHabitPhrase,
   createHabit,
-  updateHabitStreak
+  updateHabitStreak,
+  updateHabit,
+  deleteHabit
 };

@@ -33,7 +33,7 @@ const Habits: React.FC = () => {
     getUserHabits();
   }, [habitCreated, user.username]);
 
-  const habitAdded = () => {
+  const fetchHabits = () => {
     setHabitCreated(!habitCreated);
   };
 
@@ -47,8 +47,8 @@ const Habits: React.FC = () => {
               <span>{phrase.author}</span>
             </blockquote>
           </Grid.Row>
-          <ModalCreateHabit habitAdded={habitAdded} />
-          <Grid.Row style={{ "background-color": "#e6e0b2" }}>
+          <ModalCreateHabit fetchHabits={fetchHabits} />
+          <Grid.Row style={{ "background-color": "#e6e0b2", 'marginTop': '15px' }}>
             <Transition.Group>
               {habits &&
                 habits.map((h) => (
@@ -58,7 +58,7 @@ const Habits: React.FC = () => {
                     mobile={16}
                     style={{ marginBottom: 20 }}
                   >
-                    <HabitCard habit={h} habitAdded={habitAdded} />
+                    <HabitCard habit={h} fetchHabits={fetchHabits} />
                   </Grid.Column>
                 ))}
             </Transition.Group>

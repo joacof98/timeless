@@ -43,12 +43,13 @@ interface Habit extends UserHabitInput {
 
 // Posts
 interface PostInfo {
-  username: String,
+  _id: string,
+  username: string,
   title: string,
-  createdAt: String,
-  description: String,
-  imageUrl: String,
-  videoUrl: String,
+  createdAt: string,
+  description: string,
+  imageUrl: string,
+  videoUrl: string,
   likes: Array,
   comments: Array
 }

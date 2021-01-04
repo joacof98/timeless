@@ -124,6 +124,28 @@ const deleteHabit = async (habit_id: string) => {
     })
 }
 
+const getAllPosts = async () => {
+  return await axios
+    .get(`http://localhost:4000/posts`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+const likePost = async (post_id: string) => {
+  return await axios
+    .put(`http://localhost:4000/posts/like/${post_id}`, {}, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
 export {
   registerUser,
   loginUser,
@@ -135,5 +157,7 @@ export {
   createHabit,
   updateHabitStreak,
   updateHabit,
-  deleteHabit
+  deleteHabit,
+  getAllPosts,
+  likePost
 };

@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar'
 import Profile from './Pages/Profile'
 import Settings from './Pages/Settings'
 import Habits from './Pages/Habits'
+import Posts from './Pages/Posts'
 
 const App: React.FC = () => {
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Router>
           <Navbar />
           <Route exact path="/" component={Home} />
+          <Route exact path="/posts" component={Posts} />
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
           <Route exact path="/u/:username" component={Profile} />

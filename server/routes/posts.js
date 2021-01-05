@@ -99,8 +99,8 @@ router.put("/like/:id", checkAuth, async (req, res) => {
       createdAt: new Date().toISOString(),
     });
   }
-  await post.save();
-  res.send(post);
+  const post_liked = await post.save();
+  res.send(post_liked);
 });
 
 module.exports = router

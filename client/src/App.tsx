@@ -24,7 +24,7 @@ const App: React.FC = () => {
           <Navbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/posts" component={Posts} />
-          <Route exact path="/create" component={CreatePost} />
+          <NotAuthRoute exact path="/create" component={CreatePost} />
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
           <Route exact path="/u/:username" component={Profile} />

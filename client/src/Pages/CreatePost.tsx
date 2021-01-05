@@ -10,6 +10,8 @@ import {
   Accordion,
   Icon,
   Button,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
 import {storage} from '../firebase/firebase'
 import {createPost} from '../util/requests'
@@ -23,6 +25,8 @@ const CreatePost: React.FC = () => {
   })
   const [videoError, setVideoError] = useState<string>('');
   const [imageError, setImageError] = useState<string>('');
+  const [errors, setErrors] = useState({})
+  const [successMsg, setSuccessMsg] = useState<boolean>(false)
   const [loader, setLoader] = useState<boolean>(false)
 
   const fileUploadButton = (media_id: string) => {
@@ -65,7 +69,6 @@ const CreatePost: React.FC = () => {
     if(file) {
       setLoader(true)
       const category = file.type.match('video.*') ? 'videos' : 'images'
-      setLoader(true)
       const uploadTask = storage.ref(`/${category}/${file.name}`).put(file)
       uploadTask.on("state_changed", console.log, console.error, () => {
         storage
@@ -89,13 +92,24 @@ const CreatePost: React.FC = () => {
       videoUrl: videoUrl
     })
     setLoader(false)
-    console.log(res)
+    if(res.error) {
+      setSuccessMsg(false)
+      setErrors(res.error)
+    } else {
+      setErrors({})
+      setSuccessMsg(true)
+    }
   }
 
   return (
     <div>
-      <Segment id="postsCover" style={{ height: "680px" }}>
+      <Segment id="postsCover" style={{ height: "710px" }}>
         <Card id="formCard">
+          {loader && (
+            <Dimmer active inverted>
+              <Loader inverted>Loading</Loader>
+            </Dimmer>
+          )}
           <Form noValidate>
             <Header as="h1" id="titleForm">
               Create a new Post
@@ -104,6 +118,21 @@ const CreatePost: React.FC = () => {
               And remember, this is your only chance in a whole month. Make it
               worth it.
             </Header>
+            {Object.keys(errors).length > 0 && !successMsg && (
+              <div>
+                {Object.values(errors).map((value: any) => (
+                  <Header
+                    key={value}
+                    as="h4"
+                    id="timeless-font"
+                    color="red"
+                    style={{ marginBottom: "10px" }}
+                  >
+                    {value}
+                  </Header>
+                ))}
+              </div>
+            )}
 
             <Form.Input
               icon="edit"
@@ -187,6 +216,11 @@ const CreatePost: React.FC = () => {
             </Button>
             {file && file.name}
           </Form>
+          {successMsg && (
+            <div className="ui success message">
+              <Header as="h4">Post created successfully!</Header>
+            </div>
+          )}
         </Card>
       </Segment>
     </div>

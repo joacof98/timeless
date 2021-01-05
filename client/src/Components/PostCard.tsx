@@ -17,7 +17,7 @@ const PostCard: React.FC<{ post: PostInfo, user: UserInfo }> = ({ post, user }) 
         </Card.Header>
         {post.description && (
           <Card.Description style={{ fontSize: "15px" }}>
-            {post.description}
+             <div dangerouslySetInnerHTML={{__html: post.description.substr(0, 700)}}></div>
           </Card.Description>
         )}
       </Card.Content>

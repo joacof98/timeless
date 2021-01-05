@@ -6,6 +6,7 @@ import { likePost } from '../util/requests'
 
 const LikeButton: React.FC<{ post: PostInfo; user: UserInfo }> = ({post,user}) => {
   const [liked, setLiked] = useState<boolean>(false);
+  const [likeCount, setLikeCount] = useState<number>(post.likes.length)
 
   useEffect(() => {
     if (
@@ -17,7 +18,8 @@ const LikeButton: React.FC<{ post: PostInfo; user: UserInfo }> = ({post,user}) =
   }, [post.likes, user]);
 
   const setLikePost = async () => {
-    await likePost(post._id)
+    const res = await likePost(post._id)
+    setLikeCount(res.likes.length)
     setLiked(!liked)
   }
 
@@ -40,8 +42,8 @@ const LikeButton: React.FC<{ post: PostInfo; user: UserInfo }> = ({post,user}) =
   return (
     <Button as="div" floated="left" labelPosition="right" onClick={setLikePost}>
       {likeBtn}
-      <Label basic color="red" pointing="left">
-        {post.likes.length}
+      <Label basic color="red" pointing="left" id='timeless-font'>
+        {likeCount}
       </Label>
     </Button>
   );

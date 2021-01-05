@@ -55,7 +55,7 @@ const Login: React.FC = (props) => {
               </Dimmer>
             )}
             <Form noValidate onSubmit={(e) => handleSubmit(e)}>
-              <Header as="h1" id="titleForm">
+              <Header as="h2" id="titleForm">
                 LogIn
               </Header>
               <Form.Input

@@ -8,7 +8,7 @@ import "../Css/Settings.css";
 const Settings: React.FC = () => {
   const { user, updateUserInfo } = useContext(AuthContext);
   const [imageAsFile, setImageAsFile] = useState(null);
-  const [errors, setErrors] = useState<String>('')
+  const [errors, setErrors] = useState({})
   const [successMsg, setSuccessMsg] = useState<Boolean>(false)
   const [usernameToChange, setUsernameToChange] = useState<String>('')
   const [loader, setLoader] = useState<Boolean>(false)
@@ -19,7 +19,11 @@ const Settings: React.FC = () => {
 
   const handleImageAsFile = (e: ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files[0];
-    setImageAsFile(image);
+    if (!image.name.match(/.(jpg|jpeg|png|gif)$/i)) {
+      setErrors({ imgError: 'Please, upload only an image.'})
+    } else {
+      setImageAsFile(image);
+    }
   };
 
   const handleUserToChange = (e: ChangeEvent<HTMLInputElement>) => {

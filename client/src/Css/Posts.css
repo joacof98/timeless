@@ -1,4 +1,4 @@
-#habitsCover {
+#postsCover {
   background-color: #e6e0b2;
   height: 100%;
 }
@@ -9,5 +9,41 @@
 
 #postBtn {
   background-color: #315054;
+  font-family: 'Roboto Mono', monospace;
+}
+
+#timeless-font {
+  font-family: 'Roboto Mono', monospace;
+}
+
+/*Form for create post */
+#formCard {
+  width: 700px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 25px;
+}
+
+#titleForm {
+  font-family: 'Roboto Mono', monospace;
+  color: #315054;
+  animation: fadeInRight;
+  animation-duration: 2s;
+}
+
+#btnCreate {
+  background-color: #315054;
+  color: #DCB172;
+  font-family: 'Roboto Mono', monospace;
+  margin-top: 15px;
+}
+
+#btnCreate:hover {
+  background-color: rgb(41, 66, 70);
+}
+
+#error-message {
+  margin-top: 8px;
+  color: #D9424B;
   font-family: 'Roboto Mono', monospace;
 }

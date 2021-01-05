@@ -51,7 +51,7 @@ const UserProfileFeed: React.FC<{ username: String }> = ({ username }) => {
                       </span>
                     </Item.Meta>
                     <Item.Description>
-                      {post.description.substr(0, 87) + "..."}
+                      {post.description && post.description.substr(0, 87) + "..."}
                     </Item.Description>
                     <Item.Extra>
                       <Label>

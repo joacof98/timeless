@@ -11,7 +11,7 @@ import {
 import "../Css/Posts.css";
 import { AuthContext } from "../util/auth";
 import { getAllPosts } from "../util/requests";
-
+import { Link } from 'react-router-dom'
 import PostCard from '../Components/PostCard';
 
 const Posts: React.FC = () => {
@@ -27,11 +27,11 @@ const Posts: React.FC = () => {
       setPosts(posts);
     }
     getPosts();
-  });
+  }, []);
 
   return (
     <div>
-      <Segment id="habitsCover">
+      <Segment id="postsCover">
         <Grid container id="content">
           <Grid.Row style={{ backgroundColor: "#e6e0b2" }}>
             <Grid.Column computer={9} mobile={16}>
@@ -55,6 +55,7 @@ const Posts: React.FC = () => {
                     iconPosition="left"
                     placeholder="Create new post..."
                     style={{ "margin-left": "60px" }}
+                    as={Link} to='/create'
                   />
                 </Segment>
               )}

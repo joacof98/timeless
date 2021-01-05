@@ -146,6 +146,17 @@ const likePost = async (post_id: string) => {
     })
 }
 
+const createPost = async (post: UserPostInput) => {
+  return await axios
+    .post('http://localhost:4000/posts/create', post, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
 export {
   registerUser,
   loginUser,
@@ -159,5 +170,6 @@ export {
   updateHabit,
   deleteHabit,
   getAllPosts,
-  likePost
+  likePost,
+  createPost
 };

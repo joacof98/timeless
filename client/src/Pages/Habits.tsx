@@ -48,7 +48,7 @@ const Habits: React.FC = () => {
             </blockquote>
           </Grid.Row>
           <ModalCreateHabit fetchHabits={fetchHabits} />
-          <Grid.Row style={{ "background-color": "#e6e0b2", 'marginTop': '15px' }}>
+          <Grid.Row style={{ "backgroundColor": "#e6e0b2", 'marginTop': '15px' }}>
             <Transition.Group>
               {habits &&
                 habits.map((h) => (

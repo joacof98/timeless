@@ -135,6 +135,17 @@ const getAllPosts = async () => {
     })
 }
 
+const getOnePost = async (post_id: string) => {
+  return await axios
+    .get(`http://localhost:4000/posts/${post_id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
 const likePost = async (post_id: string) => {
   return await axios
     .put(`http://localhost:4000/posts/like/${post_id}`, {}, {headers: jwtHeader})
@@ -157,19 +168,62 @@ const createPost = async (post: UserPostInput) => {
     })
 }
 
+const deletePost = async (post_id: string) => {
+  return await axios
+    .delete(`http://localhost:4000/posts/${post_id}`, {headers: jwtHeader})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(err => {
+      return({"error": err.response.data})
+    })
+}
+
+const deleteComment = async (c_id: string, p_id: string) => {
+  return await axios
+    .post(
+      "http://localhost:4000/comments/delete",
+      { comment_id: c_id, post_id: p_id },
+      { headers: jwtHeader }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return { error: err.response.data };
+    });
+}
+
+const createComment = async (body: string, p_id: string) => {
+  return await axios
+    .post(
+      "http://localhost:4000/comments/",
+      { body, post_id: p_id },
+      { headers: jwtHeader }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return { error: err.response.data };
+    });
+}
+
+const top5Followers = async () => {
+  return await axios
+    .get( 
+      "http://localhost:4000/users/top/followers"
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return { error: err.response.data };
+    });
+}
+
 export {
-  registerUser,
-  loginUser,
-  getUser,
-  followProfileUser,
-  getPostsByUsername,
-  updateProfile,
-  getHabitPhrase,
-  createHabit,
-  updateHabitStreak,
-  updateHabit,
-  deleteHabit,
-  getAllPosts,
-  likePost,
-  createPost
+  registerUser, loginUser, getUser, followProfileUser, getPostsByUsername, updateProfile,
+  getHabitPhrase, createHabit, updateHabitStreak, updateHabit, deleteHabit, getAllPosts,
+  likePost, createPost, getOnePost, deleteComment, createComment, deletePost, top5Followers
 };

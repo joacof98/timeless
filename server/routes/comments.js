@@ -22,8 +22,8 @@ router.post("/", checkAuth, async (req, res) => {
       username: req.user.username,
       createdAt: new Date().toISOString()
     })
-    await post.save()
-    res.send({success: "Comment added!"})
+    const post_updated = await post.save()
+    res.send(post_updated)
   }
 })
 
@@ -40,15 +40,10 @@ router.post("/delete", checkAuth, async (req, res) => {
       notFound: "The comment doesnt exists"
     })
   }
-  if (req.user.username !== post.comments[commentIndex].username) {
-    return res.status(401).send({
-      unauthorized: "You do not have permissions to delete this comment.",
-    });
-  } else {
-    post.comments.splice(commentIndex,1);
-		await post.save();
-    res.send({ success: "Comment deleted succesfully!" });
-  }
+  
+  post.comments.splice(commentIndex,1);
+	const post_updated = await post.save();
+  res.send(post_updated);
 })
 
 module.exports = router

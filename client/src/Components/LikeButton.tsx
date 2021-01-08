@@ -25,11 +25,11 @@ const LikeButton: React.FC<{ post: PostInfo; user: UserInfo }> = ({post,user}) =
 
   const likeBtn = user ? (
     liked ? (
-      <Button color="red">
+      <Button color="red" onClick={setLikePost}>
         <Icon name="heart" />
       </Button>
     ) : (
-      <Button color="red" basic>
+      <Button color="red" basic onClick={setLikePost}>
         <Icon name="heart" />
       </Button>
     )
@@ -40,7 +40,7 @@ const LikeButton: React.FC<{ post: PostInfo; user: UserInfo }> = ({post,user}) =
   );
 
   return (
-    <Button as="div" floated="left" labelPosition="right" onClick={setLikePost}>
+    <Button as="div" floated="left" labelPosition="right">
       {likeBtn}
       <Label basic color="red" pointing="left" id='timeless-font'>
         {likeCount}

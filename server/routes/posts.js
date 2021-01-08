@@ -34,7 +34,6 @@ router.delete("/:id", checkAuth, async (req, res) => {
   const {valid, errors} = await validatePostId(req.params.id)
   if(!valid) return res.status(400).send(errors)
   const post = await Post.findById(req.params.id);
-
   if (req.user.username !== post.username) {
     return res.status(401).send({
       unauthorized: "You do not have permissions to delete this post.",

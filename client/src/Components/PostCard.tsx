@@ -9,15 +9,24 @@ const PostCard: React.FC<{ post: PostInfo, user: UserInfo }> = ({ post, user }) 
   return (
     <Card fluid>
       <Card.Content textAlign="left">
-        <Card.Meta as={Link} to={`/u/${post.username}`} >
+        <Card.Meta as={Link} to={`/u/${post.username}`}>
           Posted by u/{post.username} ⌛ {moment(post.createdAt).fromNow()}{" "}
         </Card.Meta>
-        <Card.Header id="timeless-font" style={{ marginTop: "5px" }}>
+        <Card.Header
+          id="timeless-font"
+          style={{ marginTop: "5px" }}
+          as={Link}
+          to={`/posts/${post._id}`}
+        >
           {post.title}
         </Card.Header>
         {post.description && (
           <Card.Description style={{ fontSize: "15px" }}>
-             <div dangerouslySetInnerHTML={{__html: post.description.substr(0, 700)}}></div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: post.description.substr(0, 700),
+              }}
+            ></div>
           </Card.Description>
         )}
       </Card.Content>
@@ -38,12 +47,12 @@ const PostCard: React.FC<{ post: PostInfo, user: UserInfo }> = ({ post, user }) 
           style={{ marginLeft: "10px" }}
           labelPosition="right"
           as={Link}
-          to={`/posts`}
+          to={`/posts/${post._id}`}
         >
           <Button color="blue" basic>
             <Icon name="comments" />
           </Button>
-          <Label basic color="blue" pointing="left" id='timeless-font'>
+          <Label basic color="blue" pointing="left" id="timeless-font">
             {post.comments.length}
           </Label>
         </Button>

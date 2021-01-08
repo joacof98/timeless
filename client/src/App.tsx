@@ -14,6 +14,7 @@ import Settings from './Pages/Settings'
 import Habits from './Pages/Habits'
 import Posts from './Pages/Posts'
 import CreatePost from './Pages/CreatePost'
+import PostPage from './Pages/PostPage'
 
 const App: React.FC = () => {
 
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Navbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/posts" component={Posts} />
+          <Route exact path="/posts/:post_id" component={PostPage} />
           <NotAuthRoute exact path="/create" component={CreatePost} />
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />

@@ -159,5 +159,20 @@ router.post("/follow", checkAuth, async (req, res) => {
   res.send({success: "Following"})
 })
 
+// GET - Get the top 5 most followed users
+router.get("/top/followers", async (req,res) => {
+  const users = await User.aggregate([
+    {
+      $project: {
+        "username": 1,
+        "followers_count": {"$size": "$followers"}
+      }
+    },
+    {$sort: {"followers_count": -1}},
+    {$limit: 5}
+  ])
+  res.send(users)
+})
+
 
 module.exports = router

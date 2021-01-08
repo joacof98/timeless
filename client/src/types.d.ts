@@ -61,6 +61,13 @@ interface UserPostInput {
   videoUrl: string
 }
 
+interface Comments {
+  _id: string
+  username: string,
+  body: string,
+  createdAt: string
+}
+
 // Phrases
 interface Phrase {
   text: string,

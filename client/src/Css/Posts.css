@@ -47,3 +47,9 @@
   color: #D9424B;
   font-family: 'Roboto Mono', monospace;
 }
+
+#postPageCard {
+  width: 700px;
+  margin: auto;
+  margin-top: 30px;
+}

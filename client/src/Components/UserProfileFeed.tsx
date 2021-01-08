@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import { getPostsByUsername } from "../util/requests";
 import "../Css/Profile.css";
+import { Link } from "react-router-dom";
 
 const moment = require("moment");
 const UserProfileFeed: React.FC<{ username: String }> = ({ username }) => {
@@ -41,8 +42,10 @@ const UserProfileFeed: React.FC<{ username: String }> = ({ username }) => {
           <Segment raised id="feedCover">
             <Item.Group divided>
               {posts.map((post) => (
-                <Item key={post.title}>
-                  {post.imageUrl && <Item.Image size="tiny" src={post.imageUrl} />}
+                <Item key={post.title} as={Link} to={`/posts/${post._id}`}>
+                  {post.imageUrl && (
+                    <Item.Image size="tiny" src={post.imageUrl} />
+                  )}
                   <Item.Content>
                     <Item.Header as="a">{post.title}</Item.Header>
                     <Item.Meta>
@@ -51,7 +54,13 @@ const UserProfileFeed: React.FC<{ username: String }> = ({ username }) => {
                       </span>
                     </Item.Meta>
                     <Item.Description>
-                      {post.description && post.description.substr(0, 87) + "..."}
+                      {post.description && (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: post.description.substr(0, 87) + "<p>...</p>"
+                          }}
+                        ></div>
+                      )}
                     </Item.Description>
                     <Item.Extra>
                       <Label>

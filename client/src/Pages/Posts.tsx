@@ -12,7 +12,9 @@ import "../Css/Posts.css";
 import { AuthContext } from "../util/auth";
 import { getAllPosts } from "../util/requests";
 import { Link } from 'react-router-dom'
+
 import PostCard from '../Components/PostCard';
+import TopUsers from '../Components/TopUsers';
 
 const Posts: React.FC = () => {
   const { user } = useContext(AuthContext);
@@ -34,7 +36,7 @@ const Posts: React.FC = () => {
       <Segment id="postsCover">
         <Grid container id="content">
           <Grid.Row style={{ backgroundColor: "#e6e0b2" }}>
-            <Grid.Column computer={9} mobile={16}>
+            <Grid.Column computer={10} mobile={16}>
               {loader && posts.length === 0 && (
                 <Dimmer active inverted>
                   <Loader inverted>Loading</Loader>
@@ -64,8 +66,8 @@ const Posts: React.FC = () => {
               ))}
             </Grid.Column>
 
-            <Grid.Column computer={7} mobile={16}>
-              <Card fluid>aca info</Card>
+            <Grid.Column computer={6} mobile={16}>
+              <TopUsers />
             </Grid.Column>
           </Grid.Row>
         </Grid>

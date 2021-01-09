@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Divider, Grid, Header, Icon, Segment } from "semantic-ui-react";
+import { Card, Grid, Header, Icon, Segment } from "semantic-ui-react";
 import "../Css/Posts.css";
 import { top5Followers } from "../util/requests";
 
@@ -32,7 +32,7 @@ const TopUsers: React.FC = () => {
                   <i>Username</i>
                 </Header>
                 {top.map((u) => (
-                  <Header as="h4" id="timeless-font">
+                  <Header as="h4" id="timeless-font" key={u.username}>
                     {u.username}
                   </Header>
                 ))}
@@ -42,7 +42,7 @@ const TopUsers: React.FC = () => {
                   <i>Followers</i>
                 </Header>
                 {top.map((u) => (
-                  <Header as="h4" id="timeless-font">
+                  <Header as="h4" id="timeless-font" key={u.username}>
                     {u.followers_count}
                   </Header>
                 ))}

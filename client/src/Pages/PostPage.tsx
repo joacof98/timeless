@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getOnePost, getUser, deletePost } from "../util/requests";
 import "../Css/Posts.css";
 import { AuthContext } from "../util/auth";
-import {Segment, Card, Image, Embed, Button, Icon, Confirm, Grid} from "semantic-ui-react";
+import {Segment, Card, Image, Embed, Button, Icon, Confirm} from "semantic-ui-react";
 import { useHistory } from 'react-router-dom'
 
 import LikeButton from "../Components/LikeButton";
@@ -63,7 +63,7 @@ const PostPage: React.FC = () => {
 
   return (
     <div>
-      <Segment id="postsCover" style={{height: '980px'}}>
+      <Segment id="postsCover">
         <Card id="postPageCard">
           <Card.Content textAlign="left">
             <Card.Meta as={Link} to={`/u/${postInfo.username}`}>
@@ -117,7 +117,7 @@ const PostPage: React.FC = () => {
           </Card.Content>
         </Card>
         
-        <Card id="formCard" style={{overflow: 'auto', maxHeight: 350 }}>
+        <Card id="formCard">
           <Comments post={postInfo} fetchUserPost={fetchUserPost} />
         </Card>
       </Segment>

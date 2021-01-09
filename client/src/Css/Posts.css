@@ -1,6 +1,7 @@
 #postsCover {
+  height: auto;
+  min-height: 630px !important;
   background-color: #e6e0b2;
-  height: 100%;
 }
 
 #content {

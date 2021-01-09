@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   Segment,
   Grid,
-  Card,
   Image,
   Input,
   Dimmer,
@@ -35,7 +34,7 @@ const Posts: React.FC = () => {
     <div>
       <Segment id="postsCover">
         <Grid container id="content">
-          <Grid.Row style={{ backgroundColor: "#e6e0b2" }}>
+          <Grid.Row>
             <Grid.Column computer={10} mobile={16}>
               {loader && posts.length === 0 && (
                 <Dimmer active inverted>
